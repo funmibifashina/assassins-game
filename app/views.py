@@ -3,5 +3,5 @@ from app import app
 
 @app.route("/")
 def index():
-    return render_template("index.html", title = "Hello", message = "World")
+    return render_template("index.html", title = "Title", message = "Message")
 

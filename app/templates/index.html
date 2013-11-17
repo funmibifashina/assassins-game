@@ -1,10 +1,18 @@
-<!doctype html>
-<html>
-    <head>
-        <title>{{title}}</title>
-    </head>
-    <body>
-        <p>{{message}}</p>
-    </body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+<h1>
+    {% if title %}
+    {{title}}
+    {% else %}
+    No title given
+    {% endif %}
+</h1>
+<p>
+    {% if message %}
+    {{message}}
+    {% else %}
+    No message given
+    {% endif %}
+</p>
+{% endblock %}
 
