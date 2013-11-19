@@ -6,5 +6,5 @@ Basic Flask site that has users
 Requirements
 ============
 
-This app uses Flask, SQLAlchemy, Alembic, WTForms, and Flask-WTF.
+This app uses Flask, SQLAlchemy, WTForms, and Flask-WTF.
 
