@@ -6,11 +6,11 @@
     {{ form.hidden_tag() }}
     {{ form.username.label }} {{ form.username(size=20) }}
     {% for error in form.errors.username %}
-    {{error}}
+    {{ error }}
     {% endfor %}<br>
     {{ form.password.label }} {{ form.password(size=20) }}
     {% for error in form.errors.password %}
-    {{error}}
+    {{ error }}
     {% endfor %}<br>
     <input type="submit" value="login">
 </form>
