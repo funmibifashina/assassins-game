@@ -1,8 +1,8 @@
-from flask import render_template, redirect, session, request, url_for, g
+from flask import render_template, redirect, session, request, url_for, g, flash
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from app import app, db, lm
-from models import User
-from forms import RegisterForm, LoginForm
+from models import User, Game
+from forms import RegisterForm, LoginForm, MakeGameForm
 
 @app.before_request
 def before_request():
@@ -36,7 +36,6 @@ def register():
                 email = form.email.data)
         db.session.add(newUser)
         db.session.commit()
-        # TODO: Catch sqlalchemy.exc.IntegrityError when non-unique email
         return redirect(url_for("thanks"))
     return render_template("register.html", title = "Register", form = form)
 
@@ -56,6 +55,28 @@ def logout():
 def users():
     return render_template("viewUsers.html", title = "View users",
             users = User.query.all())
+
+@app.route("/games")
+def games():
+    return render_template("viewGames.html", title = "View games",
+            games = Game.query.all())
+
+@app.route("/game/<gameId>")
+def gameDetail(gameId = None):
+    return render_template("titleAndMsg.html", title = "Game #" + gameId,
+            message = "Game details")
+
+@app.route("/makeGame", methods = ["GET", "POST"])
+def makeGame():
+    form = MakeGameForm()
+    if form.validate_on_submit():
+        newGame = Game(title = form.title.data)
+        db.session.add(newGame)
+        db.session.commit()
+        flash("Thanks for creating a game!")
+        return redirect(url_for("games"))
+    return render_template("makeGame.html", title = "Make game",
+            form = form)
 
 # used by Flask-Login
 @lm.user_loader

@@ -23,7 +23,9 @@
         <div id="nav">
             <a href="{{ url_for("index") }}">Home</a>
             <a href="{{ url_for("users") }}">Users</a>
+            <a href="{{ url_for("games") }}">Games</a>
             {% if g.user.is_authenticated() %}
+            <a href="{{ url_for("makeGame") }}">Make game</a>
             <a href="{{ url_for("logout") }}">Logout</a><br>
             Logged in as: {{ g.user.nickname }}
             {% else %}

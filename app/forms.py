@@ -5,7 +5,7 @@ from models import User
 
 def non_duplicate_email(form, field):
     sameEmails = User.query.filter_by(email = field.data)
-    if len(sameEmails.all()) > 0:
+    if sameEmails.count() > 0:
         raise ValidationError("Duplicate email detected")
 
 class RegisterForm(Form):
@@ -18,4 +18,7 @@ class RegisterForm(Form):
 class LoginForm(Form):
     username = TextField("Username", validators = [Required()])
     password = PasswordField("Password", validators = [Required()])
+
+class MakeGameForm(Form):
+    title = TextField("Title")
 
