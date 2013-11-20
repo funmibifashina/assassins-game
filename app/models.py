@@ -1,11 +1,12 @@
+import datetime
 from app import db
 
 class User(db.Model):
     id_ = db.Column(db.Integer, primary_key = True)
     nickname = db.Column(db.String(32), index = True, unique = True)
     email = db.Column(db.String(128), index = True, unique = True)
-    emailConfirmed = db.Column(db.Boolean())
-    dateTimeCreated = db.Column(db.DateTime())
+    emailConfirmed = db.Column(db.Boolean(), default = False)
+    dateTimeCreated = db.Column(db.DateTime(), default = datetime.datetime.now())
     # Yes, this is bad
     password = db.Column(db.String(128))
 
