@@ -1,0 +1,48 @@
+body {
+    font-size: 75%;
+    background-color: #FFFFFF;
+    font-family: sans-serif;
+}
+
+h1 {
+    font-size: 3em;
+}
+
+p {
+    font-size: 1.25em;
+}
+
+form {
+    font-size: 1.25em;
+}
+
+a {
+    color: #000000;
+}
+
+a:visited {
+    color: #333333;
+}
+
+#content {
+    width: 75%;
+    background-color: #ffffff;
+}
+
+#nav {
+    position: absolute;
+    right: 3em;
+    top: 3em;
+    width: 10em;
+}
+
+.flashes {
+    background: #FF4040;
+    color: #FFFFFF;
+    font-size: 1.25em;
+    font-weight: bold;
+    text-align: center;
+    padding: .5em;
+    width: 65%;
+}
+

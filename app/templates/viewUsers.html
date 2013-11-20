@@ -3,7 +3,7 @@
 {% block content %}
 <h1>View users</h1>
 {% for user in users %}
-{{ user.nickname }} ({{ user.email }})<br>
+<p>{{ user.nickname }} ({{ user.email }})</p>
 {% endfor %}
 {% endblock %}
 
