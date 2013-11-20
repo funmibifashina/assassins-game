@@ -30,10 +30,13 @@ a:visited {
 }
 
 #nav {
+    /*
     position: absolute;
     right: 3em;
     top: 3em;
+    */
     width: 10em;
+    float: right;
 }
 
 .flashes {
