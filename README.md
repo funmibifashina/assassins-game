@@ -1,10 +1,11 @@
 Flask with Users
 ================
 
-Basic Flask site that has users
+Basic site that has users. Users can register, login, and view the list
+of registered users.
 
 Requirements
 ============
 
-This app uses Flask, SQLAlchemy, WTForms, and Flask-WTF.
+This app uses Flask, SQLAlchemy, Flask-Login, and WTForms.
 
