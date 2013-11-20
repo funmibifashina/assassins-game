@@ -9,3 +9,7 @@ class RegisterForm(Form):
             validators = [Required(), EqualTo("password")])
     email = TextField("Email", validators = [Email()])
 
+class LoginForm(Form):
+    username = TextField("Username", validators = [Required()])
+    password = PasswordField("Password", validators = [Required()])
+

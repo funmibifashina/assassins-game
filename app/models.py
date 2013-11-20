@@ -10,6 +10,19 @@ class User(db.Model):
     # Yes, this is bad
     password = db.Column(db.String(128))
 
+    # these next 4 are required by Flask-Login
+    def is_authenticated(self):
+        return True
+
+    def is_active(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return unicode(self.id_)
+
     def __repr__(self):
         return "<User %r>" % (self.nickname)
 
