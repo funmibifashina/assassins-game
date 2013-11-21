@@ -1,8 +1,7 @@
-Flask with Users
-================
+assassins-game
+==============
 
-Basic site that has users. Users can register, login, and view the list
-of registered users.
+Basic website which automates the live-action game [Assassins](https://en.wikipedia.org/wiki/Assassin_%28game%29).
 
 Requirements
 ============
