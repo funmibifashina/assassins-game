@@ -2,7 +2,7 @@ from flask import render_template, redirect, session, request, url_for, g, flash
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from app import app, db, lm
 from models import User, Game
-from forms import RegisterForm, LoginForm, MakeGameForm
+from forms import RegisterForm, LoginForm, MakeGameForm, EditGameForm
 
 @app.before_request
 def before_request():
@@ -61,10 +61,25 @@ def games():
     return render_template("viewGames.html", title = "View games",
             games = Game.query.all())
 
-@app.route("/game/<gameId>")
+@app.route("/game/view/<gameId>")
 def gameDetail(gameId = None):
-    return render_template("titleAndMsg.html", title = "Game #" + gameId,
-            message = "Game details")
+    game = Game.query.get(gameId)
+    return render_template("gameDetail.html", title = "Game #" + gameId,
+            game = game)
+
+@app.route("/game/edit/<gameId>", methods = ["GET", "POST"])
+def gameEdit(gameId = None):
+    form = EditGameForm()
+    if form.validate_on_submit():
+        game = Game.query.get(gameId)
+        if form.userToAdd.data != "":
+            game.users.append(User.query.filter_by(nickname = form.userToAdd.data).first())
+        if form.title.data != "":
+            game.title = form.title.data
+        db.session.commit()
+        return redirect(url_for("gameDetail", gameId = gameId))
+    return render_template("gameEdit.html", title = "Edit game #" + gameId,
+            form = form)
 
 @app.route("/makeGame", methods = ["GET", "POST"])
 def makeGame():

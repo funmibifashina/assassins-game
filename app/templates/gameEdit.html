@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Edit game</h1>
+<form action="" method="POST" name="editGame">
+    {{ form.hidden_tag() }}
+    {{ form.title.label }} {{ form.title(size=20) }}
+    {% for error in form.errors.title %}
+    {{ error }}
+    {% endfor %}<br>
+    {{ form.userToAdd.label }} {{ form.userToAdd(size=20) }}
+    {% for error in form.errors.userToAdd %}
+    {{ error }}
+    {% endfor %}<br>
+    <input type="submit" value="Edit game">
+</form>
+{% endblock %}
+
