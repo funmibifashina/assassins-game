@@ -4,12 +4,6 @@ from app import db
 from sqlalchemy import Table, Text, MetaData
 from sqlalchemy.orm import backref
 
-# association table to tell which Users are in which Games
-#game_players = Table("game_players", db.metadata,
-#        db.Column("game_id", db.Integer, db.ForeignKey("games.id_")),
-#        db.Column("user_id", db.Integer, db.ForeignKey("users.id_"))
-#    )
-
 class Player(db.Model):
     __tablename__ = "game_players"
 
