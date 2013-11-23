@@ -18,7 +18,7 @@ class Game(db.Model):
     __tablename__ = "games"
 
     id_ = db.Column(db.Integer, primary_key = True)
-    state = db.Column(db.Integer)
+    state = db.Column(db.Integer, default = GAME_NOT_STARTED)
     title = db.Column(db.String(32))
 
     # many to many Game <-> User
