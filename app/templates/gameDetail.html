@@ -3,11 +3,18 @@
 {% block content %}
 <h1>Game #{{ game.id_ }}</h1>
 <h2>{{ game.title }}</h2>
-<p><a href="{{ url_for("gameEdit", gameId = game.id_) }}">Edit</a>
+{# Ideally, this would use models.GAME_NOT_STARTED #}
+{% if game.state == 0 %}
+<p>
+    <a href="{{ url_for("gameEdit", gameId = game.id_) }}">Edit</a>
+    <a href="{{ url_for("gameStart", gameId = game.id_) }}">Start</a>
+</p>
+{% endif %}
+<p>Game status: {{ game.state }}</p>
 <h2>Users</h2>
 <ul class="users">
-{% for user in game.users %}
-    <li>{{ user.nickname }}</li>
+{% for assoc in game.players %}
+<li>{{ assoc.user.nickname }} -&gt; {{ assoc.target.nickname }}</li>
 {% endfor %}
 </ul>
 {% endblock %}

@@ -1,7 +1,7 @@
 from flask import render_template, redirect, session, request, url_for, g, flash
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from app import app, db, lm
-from models import User, Game
+from models import User, Game, Player, GAME_NOT_STARTED
 from forms import RegisterForm, LoginForm, MakeGameForm, EditGameForm
 
 @app.before_request
@@ -73,13 +73,25 @@ def gameEdit(gameId = None):
     if form.validate_on_submit():
         game = Game.query.get(gameId)
         if form.userToAdd.data != "":
-            game.users.append(User.query.filter_by(nickname = form.userToAdd.data).first())
+            player = Player()
+            player.user = User.query.filter_by(nickname = form.userToAdd.data).first()
+            game.players.append(player)
         if form.title.data != "":
             game.title = form.title.data
         db.session.commit()
         return redirect(url_for("gameDetail", gameId = gameId))
     return render_template("gameEdit.html", title = "Edit game #" + gameId,
             form = form)
+
+@app.route("/game/start/<gameId>")
+def gameStart(gameId = None):
+    game = Game.query.get(gameId)
+    if game is not None and game.state == GAME_NOT_STARTED:
+        game.startGame()
+    elif game.state != GAME_NOT_STARTED:
+        flash("Game already started or completed")
+
+    return redirect(url_for("gameDetail", gameId = gameId))
 
 @app.route("/makeGame", methods = ["GET", "POST"])
 def makeGame():
