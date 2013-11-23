@@ -8,3 +8,9 @@ Requirements
 
 This app uses Flask, SQLAlchemy, Flask-Login, and WTForms.
 
+You should be able to get all these with:
+
+```
+pip install flask flask-wtf flask-sqlalchemy flask-login
+```
+
