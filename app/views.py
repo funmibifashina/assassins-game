@@ -86,7 +86,8 @@ def gameEdit(gameId = None):
 @app.route("/game/start/<gameId>")
 def gameStart(gameId = None):
     game = Game.query.get(gameId)
-    if game is not None and game.state == GAME_NOT_STARTED:
+    MIN_NUM_PLAYERS = 2
+    if game is not None and game.state == GAME_NOT_STARTED and len(game.players) >= MIN_NUM_PLAYERS:
         game.startGame()
     elif game.state != GAME_NOT_STARTED:
         flash("Game already started or completed")
